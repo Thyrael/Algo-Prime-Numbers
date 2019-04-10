@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -19,18 +20,27 @@ func main () {
 		return
 	}
 
-	if inputAsInt % 2 == 0 {
-		if inputAsInt == 2 {
-			fmt.Println("true")
-			return
-		}
+	if checkIfInputNumberIsPrimeNumber(inputAsInt) {
+		fmt.Println("true")
+	} else {
 		fmt.Println("false")
-		return
 	}
-	for d := 3; d*d <= inputAsInt; d = d+2 {
-		if inputAsInt % d == 0 {
-			fmt.Println("false") // Composed number
+}
+
+func checkIfInputNumberIsPrimeNumber(input int) bool{
+	if  math.Signbit(float64(input)) {
+		return false
+	}
+	if input % 2 == 0 {
+		if input == 2 {
+			return true
+		}
+		return false
+	}
+	for d := 3; d*d <= input; d = d+2 {
+		if input % d == 0 {
+			return false
 		}
 	}
-	fmt.Println("true") // Prime number
+	return true
 }
